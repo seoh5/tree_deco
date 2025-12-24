@@ -1,0 +1,203 @@
+@charset "UTF-8";
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+body::before{
+    content: "";
+    background-image: url(image/background.jpg);
+    background-size: cover;
+    opacity: 60%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+}
+
+.tree{
+    width: 60vh;
+    height: 80vh;
+    margin: 0 auto;
+    display: block;
+    position: relative;
+}
+
+.audio_box{
+    position: absolute;
+    width:95px;
+    height: 45px;
+    top: 4%;
+    left: 90%;
+    overflow: hidden;
+}
+.audio_play{
+    float: left;
+}
+.audio_play, .audio_stop{
+    width: 50%;
+    height: 45px;
+    background: none;
+    border-style: none;
+    cursor: pointer;
+}
+
+.audio_play::before{
+    content: "";
+    background-image: url(image/audio_play.png);
+    background-size: 45px;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+}
+
+.audio_play:hover::before{
+    filter: brightness(0.8);
+}
+
+.audio_stop::before{
+    content: "";
+    background-image: url(image/audio_stop.png);
+    background-size: 45px;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0px;
+    left: 50px;
+    bottom: 0px;
+    right: 0px;
+}
+
+.audio_stop:hover::before{
+    filter: brightness(0.8);
+}
+
+.toolbar{
+    width: 350px;
+    height: auto;
+    top: 20px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    background: rgb(255, 255, 255);
+    border-radius: 20px;
+    padding: 10px;
+    z-index: 100;
+}
+
+.tool_image img, .tool_light img, .tool_check img{
+    width: 60px;
+}
+
+.tool_image img:hover, .tool_light img:hover, 
+.tool_check img:hover{
+    filter: brightness(0.8);
+    cursor: pointer;
+}
+
+#light_layer {
+    /* ... 기존 설정 ... */
+    z-index: 60; /* 이미지들보다 위 혹은 아래 적절히 배치 */
+}
+
+/* 완성 후 마우스 커서가 바뀌지 않도록 보장 */
+.img_container.finished {
+    pointer-events: none !important;
+    cursor: default !important;
+}
+
+.image_save {
+    position: fixed; /* 화면에 고정 */
+    bottom: 50px;    /* 바닥에서 50px 위 */
+    left: 50%;
+    transform: translateX(-50%); /* 정확히 가운데 정렬 */
+    
+    display: none;   /* 처음엔 숨김 */
+    padding: 15px 30px;
+    background-color: #c0392b; /* 크리스마스 레드 */
+    color: white !important;
+    font-weight: bold;
+    font-size: 18px;
+    text-decoration: none;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    
+    z-index: 9999; /* 최상단 레이어로 설정 */
+    cursor: pointer;
+}
+
+/* 버튼이 나타날 때 살짝 애니메이션 (선택 사항) */
+.image_save.show {
+    display: block;
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translate(-50%, 20px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+
+/* 이미지를 감싸는 상자 */
+.img_container {
+    position: absolute; /* 자유롭게 배치 */
+    border: 1px dashed transparent;
+    padding: 5px;
+    z-index: 5;
+    touch-action: none;
+}
+
+.img_container:hover {
+    border: 1px dashed #777; /* 마우스 올리면 영역 표시 */
+}
+
+/* 이미지 스타일 */
+.img_container img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* 이미지가 버튼 클릭을 방해하지 않도록 */
+}
+
+/* 삭제 버튼 (우측 상단) */
+.btn_delete {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 22px;
+    height: 22px;
+    background-color: #ff4d4d;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 22px;
+    cursor: pointer;
+    font-weight: bold;
+    z-index: 10; /* 이미지보다 위로 */
+}
+
+/* 사이즈 조절 핸들 (우측 하단) */
+.resizer {
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    width: 12px;
+    height: 12px;
+    background-color: rgb(251, 219, 51);
+    cursor: nwse-resize; /* 대각선 조절 커서 */
+    z-index: 5;
+    display: block !important;
+}

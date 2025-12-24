@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>트리 꾸미기</title>
+    <link rel="icon" href="image/favicon_tree.ico">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background"><div class="blur"></div></div>
+    <img src="image/tree.png" alt="트리 사진" class="tree">
+
+    <div class="audio_box">
+        <button class="audio_play"></button>
+        <button class="audio_stop"></button>
+    </div>
+    <audio class="audio_source" src="audio/christmas.mp3"></audio>
+
+    <ul class="toolbar">
+        <li class="tool_image"><img src="image/icon_image.png" alt="이미지 추가"></li>
+        <li class="tool_light"><img src="image/icon_light.png" alt="조명 추가"></li>
+        <li class="tool_check"><img src="image/icon_check.png" alt="완성"></li>
+    </ul>
+
+    <a href="#" class="image_save">이미지 저장하기</a>
+
+    <div id="canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></div>
+
+    <canvas id="line_layer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; pointer-events: none;"></canvas>
+    <canvas id="light_layer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 6; pointer-events: none;"></canvas>
+    
+    <input type="file" id="file_input" accept="image/*" style="display: none;">
+
+    <script src="https://unpkg.com/gif.js@0.2.0/dist/gif.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
